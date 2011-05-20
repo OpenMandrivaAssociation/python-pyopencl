@@ -18,6 +18,7 @@ BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Requires:	nvidia-current-cuda-opencl
 BuildRequires:	nvidia-cuda-toolkit-devel
 BuildRequires:	nvidia-current-cuda-opencl
+BuildRequires:	nvidia-current-devel
 BuildRequires:	python-sphinx
 BuildRequires:	python-setuptools >= 0.6c9
 BuildRequires:	python-numpy-devel >= 1.0.4
