@@ -2,7 +2,7 @@
 %define name	python-%{module}
 %define version 2011.1
 %define rel	beta3
-%define release %mkrel 0.%{rel}
+%define release %mkrel 1.%{rel}
 
 %define _requires_exceptions libOpenCL.*
 
@@ -52,7 +52,7 @@ This package has been build against NVIDIA's OpenCL implementation.
 %build
 
 %if %mdkversion < 201100
-virtualenv --distribute CL
+virtualenv --never-download --distribute CL
 ./CL/bin/python ./configure.py --cl-lib-dir=/usr/lib/nvidia-current,/usr/lib64/nvidia-current \
 --boost-inc-dir=/usr/include/,/usr/include/boost \
 --boost-lib-dir=/usr/lib,/usr/lib64 --boost-python-libname=boost_python 
