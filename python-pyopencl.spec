@@ -15,6 +15,7 @@ License:	MIT
 Group:		Development/Python
 Url:		http://mathema.tician.de/software/pyopencl
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
+Requires:	nvidia-current-cuda-opencl
 BuildRequires:	nvidia-cuda-toolkit-devel
 BuildRequires:	nvidia-current-cuda-opencl
 BuildRequires:	python-sphinx
