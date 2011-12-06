@@ -1,8 +1,7 @@
 %define	module	pyopencl
 %define name	python-%{module}
-%define version 2011.1
-%define rel	beta3
-%define release %mkrel 1.%{rel}
+%define version 2011.2
+%define release %mkrel 1
 
 %define _requires_exceptions libOpenCL.*
 
@@ -10,7 +9,7 @@ Summary:	Python wrapper for OpenCL
 Name:		%{name}
 Version:	%{version}
 Release:	%{release}
-Source0:	%{module}-%{version}%{rel}.tar.gz
+Source0:	%{module}-%{version}.tar.gz
 License:	MIT
 Group:		Development/Python
 Url:		http://mathema.tician.de/software/pyopencl
@@ -23,6 +22,7 @@ BuildRequires:	python-sphinx
 BuildRequires:	python-setuptools >= 0.6c9
 BuildRequires:	python-numpy-devel >= 1.0.4
 BuildRequires:	boost-devel
+BuildRequires:	python-mako
 %if %mdkversion < 201100
 BuildRequires: 	python-virtualenv
 %endif
@@ -47,7 +47,7 @@ computation API. What makes PyOpenCL special?
 This package has been build against NVIDIA's OpenCL implementation.
 
 %prep
-%setup -q -n %{module}-%{version}%{rel}
+%setup -q -n %{module}-%{version}
 
 %build
 
@@ -74,7 +74,7 @@ popd
 %__rm -rf %{buildroot}
 %if %mdkversion < 201100
 PYTHONDONTWRITEBYTECODE= ./CL/bin/python setup.py install --root=tmp/
-PYOPENCLROOT=`find tmp/ -name pyopencl-%{version}%{rel}`
+PYOPENCLROOT=`find tmp/ -name pyopencl-%{version}`
 echo $PYOPENCLROOT
 %__install -d -m 755 %{buildroot}/usr
 mv -f $PYOPENCLROOT/CL/* %{buildroot}/usr/
@@ -88,4 +88,6 @@ PYTHONDONTWRITEBYTECODE= %__python setup.py install --root=%{buildroot}
 %files
 %defattr(-,root,root)
 %doc doc/build/html/ examples/ README
+%_includedir/pyopencl/*
 %py_platsitedir/pyopencl*
+
