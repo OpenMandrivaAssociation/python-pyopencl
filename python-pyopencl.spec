@@ -1,7 +1,12 @@
 %define	module	pyopencl
 %define name	python-%{module}
-%define version 2011.2
-%define release %mkrel 1
+%define version 2012.1
+%define	rel		1
+%if %mdkversion < 201100
+%define release %mkrel %{rel}
+%else
+%define release	%{rel}
+%endif
 
 %define _requires_exceptions libOpenCL.*
 
