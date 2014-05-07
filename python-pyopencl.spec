@@ -1,24 +1,16 @@
 %define	module	pyopencl
-%define name	python-%{module}
-%define version 2012.1
-%define	rel		1
-%if %mdkversion < 201100
-%define release %mkrel %{rel}
-%else
-%define release	%{rel}
-%endif
 
-%define _requires_exceptions libOpenCL.*
+%define %define __noautoreq libOpenCL.*
 
 Summary:	Python wrapper for OpenCL
-Name:		%{name}
-Version:	%{version}
-Release:	%{release}
+
+Name:		python-%{module}
+Version:	2012.1
+Release:	2
 Source0:	%{module}-%{version}.tar.gz
 License:	MIT
 Group:		Development/Python
 Url:		http://mathema.tician.de/software/pyopencl
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Requires:	nvidia-current-cuda-opencl
 BuildRequires:	nvidia-cuda-toolkit-devel
 BuildRequires:	nvidia-current-cuda-opencl
@@ -28,9 +20,6 @@ BuildRequires:	python-setuptools >= 0.6c9
 BuildRequires:	python-numpy-devel >= 1.0.4
 BuildRequires:	boost-devel
 BuildRequires:	python-mako
-%if %mdkversion < 201100
-BuildRequires: 	python-virtualenv
-%endif
 BuildRequires:	python-devel
 
 %description
@@ -56,18 +45,10 @@ This package has been build against NVIDIA's OpenCL implementation.
 
 %build
 
-%if %mdkversion < 201100
-virtualenv --never-download --distribute CL
-./CL/bin/python ./configure.py --cl-lib-dir=/usr/lib/nvidia-current,/usr/lib64/nvidia-current \
---boost-inc-dir=/usr/include/,/usr/include/boost \
---boost-lib-dir=/usr/lib,/usr/lib64 --boost-python-libname=boost_python 
-./CL/bin/python setup.py build
-%else
 %__python ./configure.py --cl-lib-dir=/usr/lib/nvidia-current,/usr/lib64/nvidia-current \
 --boost-inc-dir=/usr/include/,/usr/include/boost \
 --boost-lib-dir=/usr/lib,/usr/lib64 --boost-python-libname=boost_python 
 %__python setup.py build
-%endif
 
 pushd doc/
 export PYTHONPATH=`dir -d ../build/lib.linux*`
@@ -76,23 +57,12 @@ find -name .buildinfo | xargs rm -f
 popd
 
 %install
-%__rm -rf %{buildroot}
-%if %mdkversion < 201100
-PYTHONDONTWRITEBYTECODE= ./CL/bin/python setup.py install --root=tmp/
-PYOPENCLROOT=`find tmp/ -name pyopencl-%{version}`
-echo $PYOPENCLROOT
-%__install -d -m 755 %{buildroot}/usr
-mv -f $PYOPENCLROOT/CL/* %{buildroot}/usr/
-%else
 PYTHONDONTWRITEBYTECODE= %__python setup.py install --root=%{buildroot}
-%endif
 
 %clean
-%__rm -rf %{buildroot}
 
 %files
-%defattr(-,root,root)
 %doc doc/build/html/ examples/ README
-%_includedir/pyopencl/*
-%py_platsitedir/pyopencl*
+%{_includedir}/pyopencl/*
+%{py_platsitedir}/pyopencl*
 
