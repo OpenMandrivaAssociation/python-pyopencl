@@ -6,7 +6,7 @@ Summary:	Python wrapper for OpenCL
 
 Name:		python-%{module}
 Version:	2012.1
-Release:	3
+Release:	4
 Source0:	%{module}-%{version}.tar.gz
 License:	MIT
 Group:		Development/Python
