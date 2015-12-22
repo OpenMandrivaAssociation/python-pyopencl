@@ -23,6 +23,7 @@ BuildRequires:	boost-devel
 BuildRequires:	python-mako
 BuildRequires:	python-devel
 BuildRequires:	python-pytools
+BuildRequires:	python-cffi
 
 %description
 PyOpenCL gives you easy, Pythonic access to the OpenCL parallel
