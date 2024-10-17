@@ -11,7 +11,7 @@ Source0:	%{module}-%{version}.tar.gz
 Source100:	%{name}.rpmlintrc
 License:	MIT
 Group:		Development/Python
-Url:		http://mathema.tician.de/software/pyopencl
+Url:		https://mathema.tician.de/software/pyopencl
 Requires:	nvidia-current-cuda-opencl
 BuildRequires:	nvidia-cuda-toolkit-devel
 BuildRequires:	nvidia-current-cuda-opencl
